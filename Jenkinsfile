@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the code from the repository
-                git url: 'https://github.com/example/repository.git'
+                git url: 'https://github.com/prakash052101/MERN-fullstack-admin-dashboard.git'
             }
         }
         
@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Run Docker container for the application
-                sh "docker run -d -p 5000:5000 -e MONGO_URL=$MONGO_URL $DOCKER_IMAGE"
+                sh "docker run -d -p 5001:5001 -e MONGO_URL=$MONGO_URL $DOCKER_IMAGE"
             }
         }
     }
