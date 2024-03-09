@@ -1,6 +1,11 @@
 pipeline {
     agent any
     
+    environment {
+        DOCKER_IMAGE = 'mern-app' // Docker image name
+        MONGO_URL = 'mongodb://localhost:27017/your-database-name' // MongoDB URL
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -22,16 +27,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build Docker image for the application
-                sh 'docker build -t mern-app .'
+                sh "docker build -t $DOCKER_IMAGE ."
             }
         }
         
         stage('Deploy') {
             steps {
                 // Run Docker container for the application
-                sh "docker run -d -p 5001:5001 mern-app"
+                sh "docker run -d -p 5000:5000 -e MONGO_URL=$MONGO_URL $DOCKER_IMAGE"
             }
         }
     }
 }
-
