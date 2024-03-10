@@ -1,5 +1,5 @@
-# Use Node.js 14 LTS as base image
-FROM node:14
+# Use the same Node.js version as the one installed on your system
+FROM node:20.11.1
 
 # Set working directory inside the container
 WORKDIR /app
@@ -14,6 +14,9 @@ RUN cd server && npm install
 
 # Copy the entire project to the working directory
 COPY . .
+
+# Copy built frontend files to Nginx server directory
+RUN cp -a client/build/. /usr/share/nginx/html/
 
 # Expose port 5001 for the Express server
 EXPOSE 5001
