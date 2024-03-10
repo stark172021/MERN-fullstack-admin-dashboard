@@ -1,5 +1,5 @@
-# Use Node.js 14 LTS as base image
-FROM node:14
+# Use the same Node.js version as the one installed on your system
+FROM node:20.11.1
 
 # Set working directory inside the container
 WORKDIR /app
