@@ -40,7 +40,7 @@ pipeline {
                 sh "docker run -d --name nginx-server -p 8081:80 -v $PWD/client/build:/usr/share/nginx/html nginx"
         
                 // Retrieve MongoDB username and password from Jenkins credentials
-                withCredentials([usernamePassword(credentialsId: 'mongodb-credentials', usernameVariable: 'MONGO_USERNAME', passwordVariable: 'MONGO_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'monodb-credentiials', usernameVariable: 'MONGO_USERNAME', passwordVariable: 'MONGO_PASSWORD')]) {
                     sh "docker run -d --name $DOCKER_IMAGE -e MONGO_URL='mongodb+srv://$MONGO_USERNAME:$MONGO_PASSWORD@cluster0.ca6w2jn.mongodb.net/?retryWrites=true&w=majority' -p 5001:5001 $DOCKER_IMAGE"
                 }
             }
