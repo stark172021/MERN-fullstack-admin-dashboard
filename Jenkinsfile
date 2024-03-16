@@ -37,7 +37,7 @@ pipeline {
                 sh "docker rm nginx-server || true"
         
                 // Run Nginx container to serve static files
-                sh "docker run -d --name nginx-server -p 8080:80 -v $PWD/client/build:/usr/share/nginx/html nginx"
+                sh "docker run -d --name nginx-server -p 8081:80 -v $PWD/client/build:/usr/share/nginx/html nginx"
         
                 // Retrieve MongoDB username and password from Jenkins credentials
                 withCredentials([usernamePassword(credentialsId: 'mongodb-credentials', usernameVariable: 'MONGO_USERNAME', passwordVariable: 'MONGO_PASSWORD')]) {
